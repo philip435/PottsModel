@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1361831007 source:d:\programmering\git\pottsmodel\pottmodel\src\matrix.cpp
+	"..//include/Matrix.h"
+	<iostream>
+	<vector>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
+1361830305 d:\programmering\git\pottsmodel\pottmodel\\include\matrix.h
+	<vector>
+
+1361830989 source:d:\programmering\git\pottsmodel\pottmodel\main.cpp
+	<iostream>
+	<vector>
+	<math.h>
+	<stdlib.h>
+	<stdio.h>
+	"include/Matrix.h"
+
+1361830305 d:\programmering\git\pottsmodel\pottmodel\include\matrix.h
+	<vector>
+
