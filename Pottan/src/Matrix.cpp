@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 using namespace std;
 
 
@@ -18,6 +19,8 @@ void Matrix::run(){
     while(e<S){
         sweep();
         e++;
+        //system("cls");
+        //Sleep(100);
     }
 }
 
@@ -34,14 +37,15 @@ void Matrix::sweep(){
 
             int H = getHamiltonian(k,NeighborH,NeighborV);
             int Hp = getHamiltonian(kp,NeighborH,NeighborV);
-            double Edelta = (Hp - H)/T/Kb;
+            double Hdelta = (Hp - H);
 
-            if(Edelta < 0){
+            if(Hdelta < 0){
                 matrix[i][j] = kp;
             }
             else{
-                if (exp(-Edelta/T) > rand()%2){
+                if (exp(-(float)Hdelta/(float)T/(float)Kb) <= (float)random.unifRand()){
                     matrix[i][j] = kp;
+                    //cout << -(float)Hdelta/(float)T/(float)Kb << " " << (float)random.unifRand() << endl;
                 }
             }
         }
@@ -67,7 +71,11 @@ int Matrix::getNeighborV(int i, int j){
 }
 
 int Matrix::getKp(int i){
-    return i+rand()%Q;
+    int b;
+    do{
+        b = rand()%Q;
+    }while(b==i);
+    return b;
 }
 
 int Matrix::getHamiltonian(int i, int j, int l){    // (CURRENT ELEMENT, NEIGHBOR, NEIGHBOR)
@@ -109,11 +117,53 @@ void Matrix::initiateValues(int m){
 }
 
 void Matrix::printMatrix(){
+
     for (int i=0; i<n; i++){
         for (int j=0; j<n; j++){
-            cout << matrix[i][j];
+                setColor(matrix[i][j]);
+            cout << " ";//matrix[i][j];
         }
         cout << endl;
     }
     cout << endl;
+}
+
+
+void Matrix::setColor(int i){
+    switch(i){
+    case 1:
+        SetConsoleTextAttribute (hConsole, 200 | FOREGROUND_INTENSITY);
+    break;
+    case 2:
+        SetConsoleTextAttribute (hConsole, 112 | FOREGROUND_INTENSITY);
+    break;
+    case 3:
+        SetConsoleTextAttribute (hConsole, 94 | FOREGROUND_INTENSITY);
+    break;
+    case 4:
+        SetConsoleTextAttribute (hConsole, 81 | FOREGROUND_INTENSITY);
+    break;
+    case 5:
+        SetConsoleTextAttribute (hConsole, 59 | FOREGROUND_INTENSITY);
+    break;
+    case 6:
+        SetConsoleTextAttribute (hConsole, 255 | FOREGROUND_INTENSITY);
+    break;
+    case 7:
+        SetConsoleTextAttribute (hConsole, 78 | FOREGROUND_INTENSITY);
+    break;
+    case 8:
+        SetConsoleTextAttribute (hConsole, 88 | FOREGROUND_INTENSITY);
+    break;
+    case 9:
+        SetConsoleTextAttribute (hConsole, 145 | FOREGROUND_INTENSITY);
+    break;
+    case 0:
+        SetConsoleTextAttribute (hConsole, 125 | FOREGROUND_INTENSITY);
+    break;
+
+    default:
+        break;
+
+    }
 }
